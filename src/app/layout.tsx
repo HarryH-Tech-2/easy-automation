@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Lexend, Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
@@ -28,6 +27,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -55,17 +59,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={`${lexend.variable} ${inter.variable} antialiased`}>
-        <ThemeProvider>
-          <OrganizationJsonLd />
-          <WebSiteJsonLd />
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <NewsletterPopup />
-        </ThemeProvider>
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+        <ScrollToTop />
+        <NewsletterPopup />
       </body>
     </html>
   );

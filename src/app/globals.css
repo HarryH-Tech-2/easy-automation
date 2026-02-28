@@ -26,15 +26,6 @@
   --muted: #6b7280;
 }
 
-[data-theme="dark"] {
-  --background: #0f0f0f;
-  --foreground: #f0f0f0;
-  --surface: #1a1a1a;
-  --surface-alt: #262626;
-  --border-color: #333333;
-  --muted: #9ca3af;
-}
-
 html {
   scroll-behavior: smooth;
 }

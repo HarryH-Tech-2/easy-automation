@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { navItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -12,7 +11,6 @@ import { cn } from '@/lib/utils';
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
@@ -60,24 +58,14 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Theme toggle + Mobile toggle */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-lg p-2 hover:bg-surface-alt transition-colors"
-              aria-label="Toggle theme"
-            >
-              <Sun className="h-5 w-5 hidden dark:block" />
-              <Moon className="h-5 w-5 block dark:hidden" />
-            </button>
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden rounded-lg p-2 hover:bg-surface-alt transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden rounded-lg p-2 hover:bg-surface-alt transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
 
         {/* Mobile Nav */}

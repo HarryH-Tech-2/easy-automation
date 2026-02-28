@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Container';
 import { EmailForm } from '@/components/email/EmailForm';
 import { ArrowRight, Zap, TrendingUp, Clock } from 'lucide-react';
+import { ParticleField } from '@/components/home/ParticleField';
 import Link from 'next/link';
 
 export function HeroSection() {
@@ -11,6 +12,8 @@ export function HeroSection() {
     <section className="relative overflow-hidden py-20 md:py-28">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary-light/50 to-transparent" />
+      {/* Particle animation */}
+      <ParticleField />
       <Container className="relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

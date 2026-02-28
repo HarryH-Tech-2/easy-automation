@@ -11,8 +11,7 @@ import { AuthorBio } from '@/components/blog/AuthorBio';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { AffiliateDisclosure } from '@/components/monetization/AffiliateDisclosure';
 import { NewsletterInline } from '@/components/email/NewsletterInline';
-import { ArticleJsonLd } from '@/components/seo/JsonLd';
-import { FAQJsonLd } from '@/components/seo/JsonLd';
+import { ArticleJsonLd, FAQJsonLd, HowToJsonLd } from '@/components/seo/JsonLd';
 import { compileMdxContent } from '@/lib/mdx';
 import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/content';
 import { extractHeadings } from '@/lib/toc';
@@ -56,6 +55,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.description,
+      images: frontmatter.featuredImage
+        ? [{ url: frontmatter.featuredImage, alt: frontmatter.featuredImageAlt || frontmatter.title }]
+        : ['/images/og-default.png'],
     },
     alternates: {
       canonical: url,
@@ -96,6 +98,13 @@ export default async function PostPage({ params }: PostPageProps) {
       />
       {frontmatter.faqs && frontmatter.faqs.length > 0 && (
         <FAQJsonLd faqs={frontmatter.faqs} />
+      )}
+      {frontmatter.howToSteps && frontmatter.howToSteps.length > 0 && (
+        <HowToJsonLd
+          name={frontmatter.title}
+          description={frontmatter.description}
+          steps={frontmatter.howToSteps}
+        />
       )}
 
       <Container className="py-8 md:py-12">

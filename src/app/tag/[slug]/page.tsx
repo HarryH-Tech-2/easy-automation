@@ -21,11 +21,18 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
   const { slug } = await params;
   const displayName = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
+  const posts = getPostsByTag(slug);
+  const postTitles = posts.slice(0, 3).map((p) => p.frontmatter.title).join(', ');
+
   return {
     title: `${displayName} — Articles & Guides`,
-    description: `Browse all articles about ${displayName.toLowerCase()} on Easy Automation.`,
+    description: `Explore ${posts.length} expert guide${posts.length !== 1 ? 's' : ''} about ${displayName.toLowerCase()}: ${postTitles}${posts.length > 3 ? ', and more' : ''}.`,
     alternates: {
       canonical: absoluteUrl(`/tag/${slug}`),
+    },
+    robots: {
+      index: false,
+      follow: true,
     },
   };
 }
