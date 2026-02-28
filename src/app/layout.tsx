@@ -24,7 +24,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: 'Easy Automation — Master Marketing & Finance Automation',
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -33,13 +33,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: siteConfig.name,
+    title: 'Easy Automation — Marketing & Finance Automation Guides',
     description: siteConfig.description,
+    images: [{ url: '/images/og-default.png', width: 1200, height: 630, alt: 'Easy Automation — practical guides to automate your business' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.name,
+    title: 'Easy Automation — Marketing & Finance Automation Guides',
     description: siteConfig.description,
+    images: ['/images/og-default.png'],
   },
   robots: {
     index: true,

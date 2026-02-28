@@ -41,12 +41,15 @@ export function Header() {
                   {item.children && <ChevronDown className="h-3.5 w-3.5" />}
                 </Link>
                 {item.children && (
-                  <div className="absolute top-full left-0 mt-1 w-48 rounded-lg border border-border bg-background shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                    {item.children.map((child) => (
+                  <div className="absolute top-full left-0 mt-1 w-64 rounded-lg border border-border bg-background shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all py-1 max-h-80 overflow-y-auto">
+                    {item.children.map((child, i) => (
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="block px-4 py-2 text-sm hover:bg-surface-alt transition-colors first:rounded-t-lg last:rounded-b-lg"
+                        className={cn(
+                          'block px-4 py-2 text-sm hover:bg-surface-alt transition-colors',
+                          i === 0 && 'font-semibold border-b border-border mb-1 pb-2'
+                        )}
                       >
                         {child.label}
                       </Link>
@@ -79,7 +82,7 @@ export function Header() {
 
         {/* Mobile Nav */}
         {mobileOpen && (
-          <nav className="md:hidden pb-4 border-t border-border mt-2 pt-4">
+          <nav className="md:hidden pb-4 border-t border-border mt-2 pt-4 max-h-[70vh] overflow-y-auto">
             {navItems.map((item) => (
               <div key={item.href}>
                 <Link
@@ -94,6 +97,16 @@ export function Header() {
                 >
                   {item.label}
                 </Link>
+                {item.children && item.children.slice(1).map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block pl-7 pr-3 py-2 text-sm text-muted hover:text-primary transition-colors"
+                  >
+                    {child.label}
+                  </Link>
+                ))}
               </div>
             ))}
           </nav>

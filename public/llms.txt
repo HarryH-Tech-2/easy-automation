@@ -1,0 +1,56 @@
+# Easy Automation
+
+> Master marketing and finance automation with expert guides, honest tool comparisons, and step-by-step workflows.
+
+Easy Automation (easyautomation.io) is an automation education hub that helps businesses and professionals discover the best automation tools and strategies to streamline their workflows, save time, and scale efficiently.
+
+## Topics Covered
+
+- **Marketing Automation**: Email marketing, social media scheduling, lead scoring, CRM integration, drip campaigns, e-commerce automation, AI-powered marketing, workflow building, and ROI measurement.
+- **Finance Automation**: Accounts payable, expense tracking, invoicing, payroll, financial reporting, tax preparation, and budgeting/forecasting.
+
+## Content Categories
+
+- [Marketing Automation](/marketing-automation): Guides on automating marketing workflows including email campaigns, social media, lead nurturing, and customer engagement.
+- [Finance Automation](/finance-automation): Guides on streamlining financial processes including invoicing, expense management, payroll, and reporting.
+- [Automation FAQs](/automation-faqs): Answers to common questions about marketing automation, finance automation, tools, costs, and getting started.
+
+## Blog Posts — Marketing Automation
+
+- [What Is Marketing Automation? A Complete Beginner's Guide](/marketing-automation/what-is-marketing-automation)
+- [Best Email Marketing Automation Tools](/marketing-automation/best-email-marketing-automation-tools)
+- [Marketing Automation for Small Business](/marketing-automation/marketing-automation-for-small-business)
+- [Social Media Automation Guide](/marketing-automation/social-media-automation-guide)
+- [How to Build Marketing Automation Workflows](/marketing-automation/marketing-automation-workflows)
+- [Lead Scoring Automation Guide](/marketing-automation/lead-scoring-automation)
+- [CRM and Marketing Automation Integration](/marketing-automation/crm-marketing-automation-integration)
+- [Marketing Automation ROI Guide](/marketing-automation/marketing-automation-roi-guide)
+- [AI-Powered Marketing Automation](/marketing-automation/ai-powered-marketing-automation)
+- [Email Drip Campaign Automation](/marketing-automation/email-drip-campaign-automation)
+- [Marketing Automation Mistakes to Avoid](/marketing-automation/marketing-automation-mistakes-to-avoid)
+- [E-commerce Marketing Automation](/marketing-automation/ecommerce-marketing-automation)
+
+## Blog Posts — Finance Automation
+
+- [Accounts Payable Automation Guide](/finance-automation/accounts-payable-automation)
+- [Automated Expense Tracking](/finance-automation/automated-expense-tracking)
+- [Automated Invoicing Guide](/finance-automation/automated-invoicing-guide)
+- [Payroll Automation Software](/finance-automation/payroll-automation-software)
+- [Financial Reporting Automation](/finance-automation/financial-reporting-automation)
+- [Tax Preparation Automation](/finance-automation/tax-preparation-automation)
+- [Budgeting and Forecasting Automation](/finance-automation/budgeting-forecasting-automation)
+
+## Other Pages
+
+- [About Us](/about-us): Our mission and approach to automation education.
+- [Contact Us](/contact-us): Get in touch with the Easy Automation team.
+- [Privacy Policy](/privacy-policy)
+- [Do Not Sell My Personal Information](/do-not-sell-personal-information)
+
+## Key Information
+
+- **Tagline**: The future will be automated, make it easy
+- **Focus**: Practical, actionable automation guides for businesses of all sizes
+- **Content approach**: Honest tool comparisons, step-by-step workflows, real-world strategies
+- **Monetization**: Affiliate links (clearly disclosed) and newsletter
+- **Technology**: Built with Next.js, hosted on Vercel
