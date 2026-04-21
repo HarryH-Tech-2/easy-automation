@@ -8,6 +8,17 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/'],
       },
+      // Explicit allow for AI crawlers (GEO / AI Overviews / LLM citations)
+      { userAgent: 'GPTBot', allow: '/' },
+      { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'OAI-SearchBot', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: '/' },
+      { userAgent: 'Claude-Web', allow: '/' },
+      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: 'Google-Extended', allow: '/' },
+      { userAgent: 'CCBot', allow: '/' },
+      { userAgent: 'Bytespider', allow: '/' },
+      { userAgent: 'Applebot-Extended', allow: '/' },
     ],
     sitemap: 'https://easyautomation.io/sitemap.xml',
   };

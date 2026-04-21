@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Search } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { navItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -56,6 +56,18 @@ export function Header() {
                 )}
               </div>
             ))}
+            <Link
+              href="/search"
+              aria-label="Search"
+              className={cn(
+                'ml-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1',
+                pathname === '/search'
+                  ? 'text-primary bg-primary-light'
+                  : 'text-foreground hover:text-primary hover:bg-surface-alt'
+              )}
+            >
+              <Search className="h-4 w-4" />
+            </Link>
           </nav>
 
           {/* Mobile toggle */}
@@ -97,6 +109,19 @@ export function Header() {
                 ))}
               </div>
             ))}
+            <Link
+              href="/search"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                'flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                pathname === '/search'
+                  ? 'text-primary bg-primary-light'
+                  : 'text-foreground hover:bg-surface-alt'
+              )}
+            >
+              <Search className="h-4 w-4" />
+              Search
+            </Link>
           </nav>
         )}
       </Container>

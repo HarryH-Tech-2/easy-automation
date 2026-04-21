@@ -15,6 +15,10 @@ export function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Respect user motion preferences — skip animation for reduced-motion users.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

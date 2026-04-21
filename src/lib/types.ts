@@ -12,6 +12,7 @@ export interface PostFrontmatter {
   faqs?: FAQ[];
   affiliateTools?: AffiliateTool[];
   tldr?: string;
+  keyTakeaways?: string[];
   howToSteps?: { name: string; text: string }[];
 }
 

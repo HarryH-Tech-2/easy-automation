@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { PostHeader } from '@/components/blog/PostHeader';
+import { TLDR } from '@/components/blog/TLDR';
 import { TableOfContents } from '@/components/blog/TableOfContents';
 import { ReadingProgress } from '@/components/blog/ReadingProgress';
 import { ShareButtons } from '@/components/blog/ShareButtons';
@@ -11,12 +12,24 @@ import { AuthorBio } from '@/components/blog/AuthorBio';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { AffiliateDisclosure } from '@/components/monetization/AffiliateDisclosure';
 import { NewsletterInline } from '@/components/email/NewsletterInline';
+import { FAQAccordion } from '@/app/automation-faqs/FAQAccordion';
 import { ArticleJsonLd, FAQJsonLd, HowToJsonLd } from '@/components/seo/JsonLd';
 import { compileMdxContent } from '@/lib/mdx';
 import { getPostBySlug, getAllPosts, getRelatedPosts } from '@/lib/content';
 import { extractHeadings } from '@/lib/toc';
 import { CATEGORIES, categoryLabels, Category } from '@/lib/constants';
+import { getAuthor, getAllAuthors } from '@/lib/authors';
 import { absoluteUrl } from '@/lib/utils';
+
+function resolveAuthor(frontmatterAuthor?: string) {
+  if (!frontmatterAuthor) return getAuthor();
+  const byName = getAllAuthors().find(
+    (a) => a.name.toLowerCase() === frontmatterAuthor.toLowerCase()
+  );
+  if (byName) return byName;
+  const bySlug = getAuthor(frontmatterAuthor.toLowerCase().replace(/\s+/g, '-'));
+  return bySlug;
+}
 
 interface PostPageProps {
   params: Promise<{ category: string; slug: string }>;
@@ -77,12 +90,16 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  const { frontmatter, content, readingTime } = post;
+  const { frontmatter, content, readingTime, wordCount } = post;
   const mdxContent = await compileMdxContent(content);
   const headings = extractHeadings(content);
   const related = getRelatedPosts(post, 3);
   const url = absoluteUrl(`/${category}/${slug}`);
   const hasAffiliateLinks = frontmatter.affiliateTools && frontmatter.affiliateTools.length > 0;
+  const author = resolveAuthor(frontmatter.author);
+  const imageUrl = frontmatter.featuredImage ? absoluteUrl(frontmatter.featuredImage) : undefined;
+  const hasSummary =
+    !!frontmatter.tldr || (!!frontmatter.keyTakeaways && frontmatter.keyTakeaways.length > 0);
 
   return (
     <>
@@ -93,8 +110,11 @@ export default async function PostPage({ params }: PostPageProps) {
         url={url}
         datePublished={frontmatter.date}
         dateModified={frontmatter.updated}
-        image={frontmatter.featuredImage}
-        authorName={frontmatter.author || 'Easy Automation'}
+        image={imageUrl}
+        author={author}
+        wordCount={wordCount}
+        articleSection={categoryLabels[category as Category]}
+        speakable={hasSummary}
       />
       {frontmatter.faqs && frontmatter.faqs.length > 0 && (
         <FAQJsonLd faqs={frontmatter.faqs} />
@@ -122,20 +142,32 @@ export default async function PostPage({ params }: PostPageProps) {
               frontmatter={frontmatter}
               category={category}
               readingTime={readingTime}
+              author={author}
             />
 
             {hasAffiliateLinks && <AffiliateDisclosure />}
 
+            <TLDR tldr={frontmatter.tldr} keyTakeaways={frontmatter.keyTakeaways} />
+
             <div className="prose prose-lg max-w-none">
               {mdxContent}
             </div>
+
+            {frontmatter.faqs && frontmatter.faqs.length > 0 && (
+              <section className="mt-12 pt-8 border-t border-border">
+                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">
+                  Frequently asked questions
+                </h2>
+                <FAQAccordion faqs={frontmatter.faqs} />
+              </section>
+            )}
 
             <div className="mt-8 pt-8 border-t border-border">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <TagList tags={frontmatter.tags} />
                 <ShareButtons url={url} title={frontmatter.title} />
               </div>
-              <AuthorBio />
+              <AuthorBio author={author} />
             </div>
           </article>
 

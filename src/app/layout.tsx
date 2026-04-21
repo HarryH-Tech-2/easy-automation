@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Lexend, Inter } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -27,11 +27,6 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  alternates: {
-    types: {
-      'application/rss+xml': '/feed.xml',
-    },
-  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -51,6 +46,25 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Populated from env vars so no-op locally. Set GOOGLE_SITE_VERIFICATION /
+  // BING_SITE_VERIFICATION / YANDEX_SITE_VERIFICATION in the deployment env
+  // to have Next.js emit the corresponding <meta> tags.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION }
+      : undefined,
+  },
+};
+
+// Browser UI tinting — matches brand primary. Next 15+ requires theme-color
+// to live in the Viewport export, not Metadata.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FF6210' },
+    { media: '(prefers-color-scheme: dark)', color: '#FF6210' },
+  ],
 };
 
 export default function RootLayout({
@@ -60,6 +74,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Feed discovery for RSS readers, Google Publisher Center, and AI
+            agents. Next.js metadata `alternates.types` is unreliable in
+            Next 16 for the root layout, so emit it manually. */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Easy Automation — latest articles"
+          href="/feed.xml"
+        />
+      </head>
       <body className={`${lexend.variable} ${inter.variable} antialiased`}>
         <OrganizationJsonLd />
         <WebSiteJsonLd />

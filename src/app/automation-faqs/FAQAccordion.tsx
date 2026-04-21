@@ -17,7 +17,7 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="space-y-3">
+    <div className="faq-accordion space-y-3">
       {faqs.map((faq, index) => (
         <div
           key={index}
